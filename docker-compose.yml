@@ -1,0 +1,24 @@
+version: '3'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    networks:
+      - app-tier
+    ports:
+      - '5000:5432'
+    environment:
+      - POSTGRESQL_PASSWORD=mosaab
+      - POSTGRES_USER=mosaab
+      - POSTGRESQL_POSTGRES_PASSWORD=mosaab
+      - POSTGRESQL_DATABASE=datawherehouse
+    volumes:
+      - postgresql:/bitnami/postgresql
+
+volumes:
+  postgresql:
+    driver: local
